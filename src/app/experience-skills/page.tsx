@@ -32,7 +32,7 @@ const experiences = [
     role: "Functional Consultant / BA Pre-Sales",
     level: "JUNIOR",
     company: "BRAVO Software JSC — Ha Noi",
-    period: "Jan 2025 – May 2026",
+    period: "Jan 2026 – May 2026",
     metrics: [
       { value: "3+", label: "Clients" },
       { value: "20+", label: "Users Trained" },

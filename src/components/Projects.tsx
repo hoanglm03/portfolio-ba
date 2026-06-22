@@ -70,7 +70,7 @@ const projects = [
   },
   {
     title: "BRAVO ERP Implementation",
-    period: "Jan 2025 – May 2026",
+    period: "Jan 2026 – May 2026",
     domain: "ERP / Enterprise",
     team: "Cross-functional",
     description:

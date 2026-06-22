@@ -6,37 +6,37 @@ const timeline = [
   {
     year: "2022",
     title: "Started University",
-    desc: "Bachelor of Management Information Systems at Thuong Mai University (GPA: 3.4/4.0)",
+    desc: "Bachelor of Management Information Systems at Thuong Mai University (GPA: 3.4/4.0). Coursework: Business Analysis, IT Project Management, Database Management, Systems Analysis & Design.",
     type: "education" as const,
   },
   {
-    year: "Jan 2025",
-    title: "BRAVO Software JSC",
-    desc: "Joined as Functional Consultant / BA Pre-Sales — ERP implementation across accounting, warehouse, HR, and production modules.",
-    type: "work" as const,
-  },
-  {
-    year: "Aug 2025",
+    year: "Aug 2025 – Present",
     title: "Freelance Web/App Builder",
-    desc: "Started freelancing — gathering requirements, designing UI/UX prototypes in Figma, deploying on Vercel.",
+    desc: "Gathered business needs for 3+ web/landing projects, designed UI/UX prototypes in Figma (cutting feedback cycles by 20%), deployed on Vercel with 100% on-time handovers, and maintained 95% customer satisfaction.",
     type: "work" as const,
   },
   {
-    year: "Oct 2025",
+    year: "Oct 2025 – Jan 2026",
     title: "Viet Tri Dao Digital Technology Co., Ltd.",
-    desc: "Business Analyst for SportHub Platform — delivered BRD, SRS, 80+ User Stories (Gherkin) for a cross-platform sports booking app with 4 system roles. Team of 10.",
+    desc: "Business Analyst for SportHub Platform — delivered BRD, SRS, 80+ User Stories (Gherkin) for a cross-platform sports booking app with 4 system roles (Player, Partner, Staff, Admin). Team of 10. Designed UI wireframes via Figma, formulated business rules (OTP, Refund, Google Maps), coordinated E2E UAT.",
+    type: "work" as const,
+  },
+  {
+    year: "Jan 2026 – May 2026",
+    title: "BRAVO Software JSC",
+    desc: "Functional Consultant / BA Pre-Sales — Elicited requirements from 3+ enterprise clients across accounting, warehouse, purchasing, production & HR-payroll. Configured ERP system (catalogs, parameters, authorization), trained 20+ end-users per project, reduced post-go-live tickets by 40% and data errors by 35%.",
     type: "work" as const,
   },
   {
     year: "2025",
     title: "1st Prize — LowCode Challenge",
-    desc: "Won overall 1st prize at LowCode Challenge 2025 (6M VND award).",
+    desc: "Won overall 1st prize at LowCode Challenge 2025 on 1C:Enterprise platform (Awarded 6,000,000 VND).",
     type: "achievement" as const,
   },
   {
     year: "2026",
     title: "Graduating & Next Chapter",
-    desc: "Completing B.Sc in MIS. Seeking Junior BA role to deepen domain expertise and deliver measurable business value.",
+    desc: "Completing B.Sc in MIS at Thuong Mai University. Seeking Junior BA role to deepen domain expertise and deliver measurable business value.",
     type: "education" as const,
   },
 ];
@@ -92,7 +92,7 @@ export default function Experience() {
 
               {/* Dot */}
               <div className="relative z-10 shrink-0">
-                <div className={`w-[14px] h-[14px] rounded-full ${typeColors[item.type]} ring-4 ring-stone-50 mt-5 ml-[17px] md:ml-0`} />
+                <div className={`w-[16px] h-[16px] rounded-full ${typeColors[item.type]} ring-4 ring-white shadow-md shadow-stone-200 mt-5 ml-[17px] md:ml-0`} />
               </div>
 
               {/* Card */}
