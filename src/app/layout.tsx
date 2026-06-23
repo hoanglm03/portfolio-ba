@@ -17,9 +17,25 @@ const dmSerif = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Hoang Le Minh | Business Analyst Portfolio",
+  title: {
+    default: "Hoang Le Minh | Business Analyst Portfolio",
+    template: "%s | Hoang Le Minh",
+  },
   description:
     "Business Analyst with hands-on experience in ERP implementation, requirements elicitation, BPMN/UML modeling, and end-user training.",
+  keywords: ["Business Analyst", "BA Portfolio", "Hoang Le Minh", "Requirements", "BPMN", "ERP", "SRS", "Use Cases"],
+  authors: [{ name: "Hoang Le Minh" }],
+  openGraph: {
+    title: "Hoang Le Minh | Business Analyst Portfolio",
+    description: "Business Analyst with hands-on experience in ERP implementation, requirements elicitation, BPMN/UML modeling, and end-user training.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Hoang Le Minh Portfolio",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

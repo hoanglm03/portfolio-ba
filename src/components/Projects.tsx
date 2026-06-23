@@ -65,8 +65,12 @@ const projects = [
     ],
     tags: ["SRS", "RBAC", "Dashboard", "UI Specs", "Validation"],
     image: null,
-    metrics: null,
-    href: null,
+    gradient: "from-indigo-950 via-indigo-900 to-violet-900",
+    bannerTitle: "Worklogs<br/>Management System",
+    bannerSubtitle: "Internal worklog tracking with RBAC, approval workflows, and reporting dashboards.",
+    bannerLabel: "Internal Tools",
+    metrics: { bpmn: 0, screens: 15, stories: 30 },
+    href: "/projects/worklogs",
   },
   {
     title: "BRAVO ERP Implementation",
@@ -83,8 +87,12 @@ const projects = [
     ],
     tags: ["ERP", "BRD", "UAT", "Training", "Configuration"],
     image: null,
-    metrics: null,
-    href: null,
+    gradient: "from-orange-950 via-amber-900 to-orange-900",
+    bannerTitle: "BRAVO ERP<br/>Implementation",
+    bannerSubtitle: "End-to-end ERP deployment across accounting, warehouse, purchasing, production & HR-payroll.",
+    bannerLabel: "Enterprise",
+    metrics: { bpmn: 0, screens: 0, stories: 0 },
+    href: "/projects/bravo-erp",
   },
 ];
 
@@ -131,11 +139,9 @@ export default function Projects() {
                       subtitle={p.bannerSubtitle || ""}
                       label={p.bannerLabel}
                     />
-                    {/* Domain + Period badge */}
                     <div className="absolute top-0 left-0 right-0 bg-emerald-950/80 backdrop-blur-sm text-white px-5 py-2 text-xs font-bold tracking-wide uppercase z-10">
                       {p.domain} · {p.period}
                     </div>
-                    {/* Metrics badges */}
                     {p.metrics && (
                       <div className="absolute bottom-3 right-4 flex gap-2 z-10">
                         <span className="px-2.5 py-1 text-xs font-bold bg-white/90 rounded-full text-stone-800 backdrop-blur-sm shadow-sm">
@@ -149,9 +155,36 @@ export default function Projects() {
                   </div>
                 )}
 
+                {/* Gradient banner for cards without image */}
+                {!p.image && p.gradient && (
+                  <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${p.gradient}`}>
+                    <div
+                      className="absolute inset-0 opacity-10"
+                      style={{
+                        backgroundImage: "radial-gradient(circle at 25% 25%, rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px)",
+                        backgroundSize: "60px 60px",
+                      }}
+                    />
+                    <div className="absolute top-0 left-0 right-0 bg-black/30 backdrop-blur-sm text-white px-5 py-2 text-xs font-bold tracking-wide uppercase z-10">
+                      {p.domain} · {p.period}
+                    </div>
+                    <div className="absolute left-6 top-1/2 -translate-y-1/2 z-10 max-w-[80%]">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2 h-2 rounded-full bg-white/60 animate-pulse" />
+                        <span className="text-white/70 text-[11px] font-semibold tracking-widest uppercase">{p.bannerLabel}</span>
+                      </div>
+                      <h3
+                        className="text-white font-display text-xl md:text-2xl leading-snug mb-2"
+                        dangerouslySetInnerHTML={{ __html: p.bannerTitle || "" }}
+                      />
+                      <p className="text-white/60 text-xs leading-relaxed max-w-[320px]">{p.bannerSubtitle}</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="p-7">
-                  {/* Top row — only show for cards without image banner */}
-                  {!p.image && (
+                  {/* Top row — only show for cards without any banner */}
+                  {!p.image && !p.gradient && (
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="font-display text-xl md:text-2xl group-hover:text-emerald-800 transition-colors">
@@ -165,8 +198,8 @@ export default function Projects() {
                     </div>
                   )}
 
-                  {/* Title for image cards */}
-                  {p.image && (
+                  {/* Title for cards with banner */}
+                  {(p.image || p.gradient) && (
                     <h3 className="font-display text-xl md:text-2xl group-hover:text-emerald-800 transition-colors mb-3">
                       {p.title}
                     </h3>

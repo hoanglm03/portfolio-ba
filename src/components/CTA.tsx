@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight, Download } from "lucide-react";
 
 export default function CTA() {
   return (
@@ -59,13 +59,23 @@ export default function CTA() {
             </span>
           </div>
 
-          <a
-            href="mailto:hoanglm03.work@gmail.com"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-emerald-900 font-semibold hover:bg-emerald-50 transition-all hover:shadow-2xl hover:shadow-emerald-400/20 active:scale-95"
-          >
-            Get In Touch
-            <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="mailto:hoanglm03.work@gmail.com"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-emerald-900 font-semibold hover:bg-emerald-50 transition-all hover:shadow-2xl hover:shadow-emerald-400/20 active:scale-95"
+            >
+              Get In Touch
+              <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <a
+              href="/Le_Minh_Hoang_CV.pdf"
+              target="_blank"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-emerald-400/40 text-white font-semibold hover:bg-emerald-800/50 hover:border-emerald-300/60 transition-all active:scale-95"
+            >
+              <Download size={16} />
+              Download CV
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
