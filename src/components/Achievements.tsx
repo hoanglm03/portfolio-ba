@@ -6,10 +6,10 @@ import { Award, GraduationCap, CheckCircle, ExternalLink, Trophy } from "lucide-
 
 const certs = [
   { title: "1st Prize (Overall Winner) — LowCode Challenge 2025", note: "Awarded 6M VND", highlight: true },
-  { title: "HackerRank SQL Advanced" },
-  { title: "Business Analyst Foundations — LinkedIn Learning" },
-  { title: "Foundations of User Experience (UX) Design" },
-  { title: "Agile Project Management" },
+  { title: "HackerRank SQL Advanced", href: "https://www.hackerrank.com/certificates/4936919c46f4" },
+  { title: "Business Analyst Foundations — LinkedIn Learning", href: "https://www.linkedin.com/learning/certificates/495285e827de44352c8d62c7497fd3ef020eefc27367db29e849ddabbe7bf5a5" },
+  { title: "Foundations of User Experience (UX) Design", href: "https://www.coursera.org/account/accomplishments/verify/JV38NXJYP7W9" },
+  { title: "Agile Project Management", href: "https://www.coursera.org/account/accomplishments/verify/GC7DQL0NFVWQ" },
 ];
 
 const skills = [
@@ -102,17 +102,33 @@ export default function Achievements() {
 
             {/* Other Certificates */}
             <div className="space-y-2.5">
-              {certs.filter(c => !c.highlight).map((c) => (
-                <div
-                  key={c.title}
-                  className="group p-3.5 rounded-xl border border-stone-100 bg-white hover:border-emerald-200 hover:shadow-sm transition-all duration-300"
-                >
+              {certs.filter(c => !c.highlight).map((c) => {
+                const content = (
                   <div className="flex items-start gap-3">
                     <CheckCircle size={15} className="mt-0.5 shrink-0 text-emerald-400" />
-                    <p className="font-medium text-sm text-stone-700">{c.title}</p>
+                    <p className="font-medium text-sm text-stone-700 flex-1">{c.title}</p>
+                    {c.href && <ExternalLink size={14} className="mt-0.5 shrink-0 text-stone-300 group-hover:text-emerald-500 transition-colors" />}
                   </div>
-                </div>
-              ))}
+                );
+                return c.href ? (
+                  <a
+                    key={c.title}
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-3.5 rounded-xl border border-stone-100 bg-white hover:border-emerald-200 hover:shadow-sm transition-all duration-300"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div
+                    key={c.title}
+                    className="group p-3.5 rounded-xl border border-stone-100 bg-white hover:border-emerald-200 hover:shadow-sm transition-all duration-300"
+                  >
+                    {content}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Education */}
