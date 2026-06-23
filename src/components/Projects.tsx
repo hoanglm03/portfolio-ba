@@ -65,7 +65,7 @@ const projects = [
     ],
     tags: ["SRS", "RBAC", "Dashboard", "UI Specs", "Validation"],
     image: null,
-    gradient: "from-indigo-950 via-indigo-900 to-violet-900",
+    gradient: "from-emerald-950 via-emerald-900 to-emerald-800",
     bannerTitle: "Worklogs<br/>Management System",
     bannerSubtitle: "Internal worklog tracking with RBAC, approval workflows, and reporting dashboards.",
     bannerLabel: "Internal Tools",
@@ -87,7 +87,7 @@ const projects = [
     ],
     tags: ["ERP", "BRD", "UAT", "Training", "Configuration"],
     image: null,
-    gradient: "from-orange-950 via-amber-900 to-orange-900",
+    gradient: "from-emerald-950 via-emerald-900 to-emerald-800",
     bannerTitle: "BRAVO ERP<br/>Implementation",
     bannerSubtitle: "End-to-end ERP deployment across accounting, warehouse, purchasing, production & HR-payroll.",
     bannerLabel: "Enterprise",
@@ -165,19 +165,19 @@ export default function Projects() {
                         backgroundSize: "60px 60px",
                       }}
                     />
-                    <div className="absolute top-0 left-0 right-0 bg-black/30 backdrop-blur-sm text-white px-5 py-2 text-xs font-bold tracking-wide uppercase z-10">
+                    <div className="absolute top-0 left-0 right-0 bg-emerald-950/80 backdrop-blur-sm text-white px-5 py-2 text-xs font-bold tracking-wide uppercase z-10">
                       {p.domain} · {p.period}
                     </div>
                     <div className="absolute left-6 top-1/2 -translate-y-1/2 z-10 max-w-[80%]">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="w-2 h-2 rounded-full bg-white/60 animate-pulse" />
-                        <span className="text-white/70 text-[11px] font-semibold tracking-widest uppercase">{p.bannerLabel}</span>
+                        <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+                        <span className="text-emerald-200 text-[11px] font-semibold tracking-widest uppercase">{p.bannerLabel}</span>
                       </div>
                       <h3
                         className="text-white font-display text-xl md:text-2xl leading-snug mb-2"
                         dangerouslySetInnerHTML={{ __html: p.bannerTitle || "" }}
                       />
-                      <p className="text-white/60 text-xs leading-relaxed max-w-[320px]">{p.bannerSubtitle}</p>
+                      <p className="text-emerald-200/70 text-xs leading-relaxed max-w-[320px]">{p.bannerSubtitle}</p>
                     </div>
                   </div>
                 )}
