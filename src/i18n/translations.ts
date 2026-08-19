@@ -91,17 +91,10 @@ export const translations = {
         work: "work",
         achievement: "achievement",
       },
-      timeline: [
-        {
-          year: "Jun 2026 – Present",
-          title: "GO4AI — Cat Speak (AI Module)",
-          desc: "Business Analyst & Product Researcher — Owned BA responsibilities across Cat Speak's AI module (Meeting Room Speaking Assistant, Content Moderation, Personalization, Writing AI). Conducted competitive analysis (Yoodli, Orai, Poised, ELSA Speak), elicited Functional Requirements with full Traceability from Business Objective to screen-level spec, resolved a Requirement Conflict between Privacy Compliance and data usefulness, and defined Scope Boundaries & phased delivery sequencing across AI modules. Team of 4, no dedicated PM.",
-          type: "work" as const,
-        },
         {
           year: "May 2026 – Present",
-          title: "GO4AI — Cat Speak (EdTech)",
-          desc: "Business Analyst — Requirement elicitation for the entire Cat Speak ecosystem: User Onboarding and Teacher/Host Portal (Room Management 1-1 & 2-5). Authored BRDs, User Flows, User Stories with Acceptance Criteria. Orchestrated UAT on Staging, reducing post-release bugs by 20% and cutting product iteration cycles by 15%. Team of 6.",
+          title: "GO4AI Technology Training — Cat Speak",
+          desc: "BA (EdTech, Team 6): Requirement elicitation for User Onboarding & Teacher/Host Portal (Room Management 1-1 & 2-5). Authored BRDs, User Flows, User Stories with ACs. Orchestrated UAT on Staging, reducing post-release bugs by 20% and cutting iteration cycles by 15%. — BA & Product Researcher (AI Module, Team 4, Jun 2026): Owned end-to-end BA for Speaking Assistant, Content Moderation, Personalization & Writing AI — competitive analysis (Yoodli, Orai, Poised, ELSA Speak), full Traceability, resolved Privacy vs. data-usefulness conflict, defined Scope Boundaries & phased delivery with no dedicated PM.",
           type: "work" as const,
         },
         {
@@ -589,17 +582,10 @@ export const translations = {
         work: "công việc",
         achievement: "thành tích",
       },
-      timeline: [
-        {
-          year: "Jun 2026 – Present",
-          title: "GO4AI — Cat Speak (AI Module)",
-          desc: "BA & Product Researcher — Phụ trách toàn bộ BA cho module AI của Cat Speak (Meeting Room Speaking Assistant, Content Moderation, Personalization, Writing AI). Phân tích cạnh tranh (Yoodli, Orai, Poised, ELSA Speak), elicitation Functional Requirements với đầy đủ Traceability, giải quyết Requirement Conflict giữa Privacy Compliance và tính hữu ích dữ liệu, xác định Scope Boundaries và phân kỳ phát triển. Nhóm 4 người, không có PM chuyên trách.",
-          type: "work" as const,
-        },
         {
           year: "May 2026 – Present",
-          title: "GO4AI — Cat Speak (EdTech)",
-          desc: "Business Analyst — Elicitation yêu cầu cho toàn bộ hệ sinh thái Cat Speak: User Onboarding và Teacher/Host Portal (Room Management 1-1 & 2-5). Soạn thảo BRD, User Flows, User Stories với Acceptance Criteria. Điều phối UAT trên Staging, giảm 20% post-release bugs và 15% iteration cycles. Nhóm 6 người.",
+          title: "GO4AI Technology Training — Cat Speak",
+          desc: "BA (EdTech, Nhóm 6): Elicitation yêu cầu cho User Onboarding & Teacher/Host Portal (Room Management 1-1 & 2-5). Soạn BRD, User Flows, User Stories với AC. Điều phối UAT trên Staging, giảm 20% post-release bugs và 15% iteration cycles. — BA & Product Researcher (AI Module, Nhóm 4, Tháng 6/2026): Phụ trách end-to-end BA cho Speaking Assistant, Content Moderation, Personalization & Writing AI — phân tích cạnh tranh (Yoodli, Orai, Poised, ELSA Speak), đầy đủ Traceability, giải quyết xung đột Privacy vs. data usefulness, xác định Scope Boundaries & phân kỳ không có PM chuyên trách.",
           type: "work" as const,
         },
         {
