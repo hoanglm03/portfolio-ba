@@ -91,6 +91,7 @@ export const translations = {
         work: "work",
         achievement: "achievement",
       },
+      timeline: [
         {
           year: "May 2026 – Present",
           title: "GO4AI Technology Training — Cat Speak",
@@ -582,6 +583,7 @@ export const translations = {
         work: "công việc",
         achievement: "thành tích",
       },
+      timeline: [
         {
           year: "May 2026 – Present",
           title: "GO4AI Technology Training — Cat Speak",
