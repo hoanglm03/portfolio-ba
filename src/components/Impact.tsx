@@ -9,47 +9,20 @@ import {
   TrendingUp,
   Shield,
 } from "lucide-react";
-
-const impacts = [
-  {
-    icon: FileText,
-    metric: "80+",
-    label: "User Stories",
-    desc: "Gherkin-format stories across multiple domains",
-  },
-  {
-    icon: GitBranch,
-    metric: "20%",
-    label: "Workflow Optimization",
-    desc: "Core operational workflows improved via ERP configuration",
-  },
-  {
-    icon: Layout,
-    metric: "10+",
-    label: "UI Screens Specified",
-    desc: "Full UI specifications for banking & sports apps",
-  },
-  {
-    icon: Users,
-    metric: "20+",
-    label: "Users Trained",
-    desc: "End-users trained per ERP project deployment",
-  },
-  {
-    icon: TrendingUp,
-    metric: "40%",
-    label: "Fewer Support Tickets",
-    desc: "Post-go-live support ticket reduction",
-  },
-  {
-    icon: Shield,
-    metric: "35%",
-    label: "Fewer Data Errors",
-    desc: "Data processing errors minimized during UAT",
-  },
-];
+import { useLang } from "@/contexts/LanguageContext";
 
 export default function Impact() {
+  const { t } = useLang();
+
+  const impacts = [
+    { icon: FileText, ...t.impact.items.userStories },
+    { icon: GitBranch, ...t.impact.items.workflow },
+    { icon: Layout, ...t.impact.items.uiScreens },
+    { icon: Users, ...t.impact.items.trained },
+    { icon: TrendingUp, ...t.impact.items.tickets },
+    { icon: Shield, ...t.impact.items.dataErrors },
+  ];
+
   return (
     <section className="relative py-28 overflow-hidden">
       {/* Background */}
@@ -66,13 +39,13 @@ export default function Impact() {
           className="mb-16"
         >
           <span className="text-xs font-semibold tracking-widest uppercase text-emerald-300 mb-3 block">
-            Measurable Results
+            {t.impact.sectionLabel}
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-white mb-4">
-            Impact & Results
+            {t.impact.title}
           </h2>
           <p className="text-emerald-200/70 max-w-lg text-lg">
-            Quantifiable outcomes from BA work across ERP, fintech, and sports domains.
+            {t.impact.subtitle}
           </p>
         </motion.div>
 

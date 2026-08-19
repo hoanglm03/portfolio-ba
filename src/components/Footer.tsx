@@ -1,4 +1,7 @@
-import { Mail } from "lucide-react";
+"use client";
+
+import { Mail, Phone } from "lucide-react";
+import { useLang } from "@/contexts/LanguageContext";
 
 function LinkedInIcon() {
   return (
@@ -9,8 +12,10 @@ function LinkedInIcon() {
 }
 
 export default function Footer() {
+  const { t } = useLang();
+
   return (
-    <footer className="bg-stone-900 text-stone-400 py-10">
+    <footer id="contact" className="bg-stone-900 dark:bg-stone-950 text-stone-400 py-10">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-baseline gap-1">
@@ -19,21 +24,29 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-stone-500">
-            &copy; {new Date().getFullYear()} Hoang Le Minh — Built with Next.js & Tailwind CSS
+            {t.footer.copyright}
           </p>
 
           <div className="flex items-center gap-4">
             <a
-              href="mailto:hoanglm03.work@gmail.com"
-              className="w-9 h-9 rounded-full bg-stone-800 flex items-center justify-center hover:bg-emerald-800 hover:text-emerald-200 transition-colors"
+              href="https://mail.google.com/mail/?view=cm&to=hoanglm03.work@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-stone-800 dark:bg-stone-700 flex items-center justify-center hover:bg-emerald-800 hover:text-emerald-200 transition-colors"
             >
               <Mail size={14} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="tel:0367725243"
+              className="w-9 h-9 rounded-full bg-stone-800 dark:bg-stone-700 flex items-center justify-center hover:bg-emerald-800 hover:text-emerald-200 transition-colors"
+            >
+              <Phone size={14} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/hoangle1/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-full bg-stone-800 flex items-center justify-center hover:bg-emerald-800 hover:text-emerald-200 transition-colors"
+              className="w-9 h-9 rounded-full bg-stone-800 dark:bg-stone-700 flex items-center justify-center hover:bg-emerald-800 hover:text-emerald-200 transition-colors"
             >
               <LinkedInIcon />
             </a>

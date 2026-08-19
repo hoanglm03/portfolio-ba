@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background: rounded square với emerald gradient -->
+  <rect width="32" height="32" rx="8" fill="url(#bg)"/>
+  <!-- Decorative accent line top-right -->
+  <circle cx="26" cy="6" r="3" fill="#6ee7b7" opacity="0.5"/>
+  <!-- Chữ B -->
+  <text x="3" y="23" font-family="Georgia, serif" font-size="17" font-weight="700" fill="white" letter-spacing="-0.5">B</text>
+  <!-- Chữ A - lệch xuống 1px tạo depth -->
+  <text x="14" y="24" font-family="Georgia, serif" font-size="17" font-weight="700" fill="#6ee7b7" letter-spacing="-0.5">A</text>
+  <!-- Underline accent -->
+  <rect x="3" y="26" width="26" height="2" rx="1" fill="#6ee7b7" opacity="0.6"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowUpRight, Download } from "lucide-react";
+import { useLang } from "@/contexts/LanguageContext";
 
 export default function CTA() {
+  const { t } = useLang();
+
   return (
     <section className="relative py-28 overflow-hidden">
       {/* Background */}
@@ -28,19 +31,20 @@ export default function CTA() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="text-xs font-semibold tracking-widest uppercase text-emerald-300 mb-4 block">
-            Get in Touch
+            {t.cta.sectionLabel}
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-white mb-5">
-            Let&apos;s Work Together
+            {t.cta.title}
           </h2>
           <p className="text-emerald-100/60 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            I&apos;m seeking a Junior BA role to deepen domain expertise and
-            deliver measurable business value. Let&apos;s connect!
+            {t.cta.subtitle}
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             <a
-              href="mailto:hoanglm03.work@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&to=hoanglm03.work@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex items-center gap-2 text-emerald-200/80 hover:text-white transition-colors"
             >
               <Mail size={16} />
@@ -55,25 +59,27 @@ export default function CTA() {
             </a>
             <span className="flex items-center gap-2 text-emerald-200/80 text-sm">
               <MapPin size={16} />
-              Thanh Liet, Ha Noi, Viet Nam
+              {t.cta.location}
             </span>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="mailto:hoanglm03.work@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&to=hoanglm03.work@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-emerald-900 font-semibold hover:bg-emerald-50 transition-all hover:shadow-2xl hover:shadow-emerald-400/20 active:scale-95"
             >
-              Get In Touch
+              {t.cta.getInTouch}
               <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <a
-              href="/Le_Minh_Hoang_CV.pdf"
+              href="/CV_Le_Minh_Hoang_BA.pdf"
               target="_blank"
               className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-emerald-400/40 text-white font-semibold hover:bg-emerald-800/50 hover:border-emerald-300/60 transition-all active:scale-95"
             >
               <Download size={16} />
-              Download CV
+              {t.cta.downloadCV}
             </a>
           </div>
         </motion.div>

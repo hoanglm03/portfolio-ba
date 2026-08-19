@@ -18,6 +18,7 @@ import {
   UserCog,
   PieChart,
 } from "lucide-react";
+import { useLang } from "@/contexts/LanguageContext";
 
 const keyMetrics = [
   { icon: FileText, value: "30+", label: "Functional Specs" },
@@ -28,87 +29,38 @@ const keyMetrics = [
   { icon: BarChart3, value: "3", label: "Chart Types" },
 ];
 
-const features = [
-  {
-    title: "Role-Based Access Control (RBAC)",
-    description:
-      "4-tier permission system: Admin manages accounts/projects/holidays; PM reviews worklogs & manages members; TL manages products; Members log worklogs.",
-  },
-  {
-    title: "Worklog Lifecycle Management",
-    description:
-      "Complete workflow: Create → Submit → Review → Approve/Reject → Resubmit. Status tracking (Open, Updated, Rejected, Closed) with comment codes.",
-  },
-  {
-    title: "Project & Product Management",
-    description:
-      "Hierarchical structure: Projects → Products/Meetings. Status tracking (Open, Closed, Pending, Canceled) with phase management.",
-  },
-  {
-    title: "Reporting Dashboards",
-    description:
-      "Pie charts for account roles & project status. Line charts for product hours/members. Bar charts for worklog hours by role/member/work type.",
-  },
-  {
-    title: "Meeting Management",
-    description:
-      "Full meeting lifecycle with conductor, secretary, attendees, meeting minutes (rich text). Linked to worklogs for time tracking.",
-  },
-  {
-    title: "Notification System",
-    description:
-      "Real-time notifications: PM notified of 'Updated' worklogs pending review; Members notified of 'Rejected' worklogs requiring resubmission.",
-  },
-];
-
 const actors = [
   {
     role: "Admin",
-    permissions: [
-      "Manage Accounts (CRUD)",
-      "Manage Projects (CRUD)",
-      "Manage Holidays (CRUD)",
-    ],
+    permissions: ["Manage Accounts (CRUD)", "Manage Projects (CRUD)", "Manage Holidays (CRUD)"],
     icon: Settings,
-    color: "text-red-600",
-    bg: "bg-red-50",
-    border: "border-red-100",
+    color: "text-red-600 dark:text-red-400",
+    bg: "bg-red-50 dark:bg-red-900/20",
+    border: "border-red-100 dark:border-red-800",
   },
   {
     role: "PM",
-    permissions: [
-      "Manage Members & Products",
-      "Review/Approve/Reject Worklogs",
-      "Edit Project & View Statistics",
-    ],
+    permissions: ["Manage Members & Products", "Review/Approve/Reject Worklogs", "Edit Project & View Statistics"],
     icon: UserCog,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
+    color: "text-blue-600 dark:text-blue-400",
+    bg: "bg-blue-50 dark:bg-blue-900/20",
+    border: "border-blue-100 dark:border-blue-800",
   },
   {
     role: "Team Leader",
-    permissions: [
-      "Manage Products",
-      "Create/Edit/Delete own Worklogs",
-      "Delete Meetings & View Statistics",
-    ],
+    permissions: ["Manage Products", "Create/Edit/Delete own Worklogs", "Delete Meetings & View Statistics"],
     icon: Users,
-    color: "text-amber-600",
-    bg: "bg-amber-50",
-    border: "border-amber-100",
+    color: "text-amber-600 dark:text-amber-400",
+    bg: "bg-amber-50 dark:bg-amber-900/20",
+    border: "border-amber-100 dark:border-amber-800",
   },
   {
     role: "Member",
-    permissions: [
-      "Create/Edit/Delete own Worklogs",
-      "Create/Edit Meetings",
-      "View All Worklogs & Statistics",
-    ],
+    permissions: ["Create/Edit/Delete own Worklogs", "Create/Edit Meetings", "View All Worklogs & Statistics"],
     icon: ClipboardCheck,
-    color: "text-green-600",
-    bg: "bg-green-50",
-    border: "border-green-100",
+    color: "text-green-600 dark:text-green-400",
+    bg: "bg-green-50 dark:bg-green-900/20",
+    border: "border-green-100 dark:border-green-800",
   },
 ];
 
@@ -127,29 +79,19 @@ const useCases = [
   { id: "UC12", name: "View Statistics (Product & Worklog)", flows: "Pie + Line + Bar charts" },
 ];
 
-const documents = [
-  { name: "Software Requirements Specification (SRS v8.3)", desc: "30+ functional specifications across 3 major modules (Admin, PM, Member)" },
-  { name: "Use Case Diagrams & Actor Definitions", desc: "4 actors with detailed permission matrix and functional breakdowns" },
-  { name: "UI Specifications & Conventions (12 rules)", desc: "Textbox, Grid, Combobox, Date Picker, Messages, Search, Paging, Checkbox rules" },
-  { name: "Error Message Catalogue", desc: "Standardized error messages per field with inline red display and green toast success" },
-  { name: "RBAC Permission Matrix", desc: "Cross-referenced Admin/PM/TL/Member access for all 10+ functional areas" },
-  { name: "Entity Status Diagrams", desc: "State machines for Project, Product, Meeting, and Worklog entities" },
-  { name: "Reporting & Dashboard Specifications", desc: "Pie, Line, Bar chart specs with dynamic filtering by role/member/status" },
-  { name: "Validation Rules & Business Logic", desc: "Field-level validation, date constraints, uniqueness checks, cascading dependencies" },
-];
-
-const conventions = [
-  { name: "Search", desc: "Textbox = contains, Combobox = exact, AND logic, Reset button" },
-  { name: "Paging", desc: "10 records/page, First/Prev/Next/Last navigation" },
-  { name: "Messages", desc: "Red inline errors, green toast success, confirmation popups" },
-  { name: "Date Picker", desc: "DD/MM/YYYY format, calendar picker, non-clearable" },
-  { name: "Grid", desc: "Sortable columns, alternating row colors, default DB records" },
-  { name: "Combobox", desc: "Alphabetical sort, blank item for optional, no blank for required" },
+const entityStatuses = [
+  { entity: "Project", statuses: ["Open", "Closed", "Pending", "Canceled"] },
+  { entity: "Product", statuses: ["Open", "Closed", "Pending", "Canceled"] },
+  { entity: "Meeting", statuses: ["Open", "Closed", "Canceled"] },
+  { entity: "Worklog", statuses: ["Open", "Updated", "Rejected", "Closed"] },
 ];
 
 export default function WorklogsDetail() {
+  const { t } = useLang();
+  const pd = t.projectDetails.worklogs;
+
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-stone-50 dark:bg-stone-900">
       {/* Hero banner */}
       <div className="relative h-[420px] md:h-[500px] overflow-hidden bg-gradient-to-br from-indigo-950 via-indigo-900 to-violet-900">
         <div className="absolute inset-0 opacity-10">
@@ -171,7 +113,7 @@ export default function WorklogsDetail() {
               className="inline-flex items-center gap-2 text-indigo-200 hover:text-white text-sm font-medium mb-6 transition-colors"
             >
               <ArrowLeft size={16} />
-              Back to Projects
+              {t.common.backToProjects}
             </Link>
             <div className="flex items-center gap-3 mb-3">
               <span className="px-3 py-1 text-[11px] font-bold tracking-wide uppercase rounded-full bg-indigo-400/20 text-indigo-200 border border-indigo-400/30">
@@ -183,7 +125,7 @@ export default function WorklogsDetail() {
               Worklogs Management System
             </h1>
             <p className="text-indigo-100 text-lg md:text-xl max-w-2xl leading-relaxed">
-              Internal worklog tracking system for software teams — RBAC, approval workflows, reporting dashboards, and complete SRS documentation.
+              {pd.heroBannerSubtitle}
             </p>
           </motion.div>
         </div>
@@ -204,11 +146,11 @@ export default function WorklogsDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="bg-white rounded-2xl p-5 shadow-lg border border-stone-100 text-center hover:shadow-xl transition-shadow"
+              className="bg-white dark:bg-stone-800 rounded-2xl p-5 shadow-lg border border-stone-100 dark:border-stone-700 text-center hover:shadow-xl transition-shadow"
             >
-              <m.icon size={20} className="mx-auto mb-2 text-indigo-600" />
-              <div className="font-display text-2xl text-indigo-800">{m.value}</div>
-              <div className="text-xs text-stone-500 mt-1 font-medium">{m.label}</div>
+              <m.icon size={20} className="mx-auto mb-2 text-indigo-600 dark:text-indigo-400" />
+              <div className="font-display text-2xl text-indigo-800 dark:text-indigo-400">{m.value}</div>
+              <div className="text-xs text-stone-500 dark:text-stone-400 mt-1 font-medium">{m.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -221,47 +163,43 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-6">About the Project</h2>
+          <h2 className="font-display text-3xl mb-6 text-stone-900 dark:text-stone-100">{pd.aboutTitle}</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <p className="text-stone-600 leading-relaxed mb-4">
-                The Worklogs Management System (WLS) is designed for small-to-medium software development
-                companies to track project progress and manage working hours. Project members log their work
-                and time spent, helping Project Managers monitor progress efficiently.
+              <p className="text-stone-600 dark:text-stone-300 leading-relaxed mb-4">
+                {pd.aboutP1}
               </p>
-              <p className="text-stone-600 leading-relaxed">
-                The system features a comprehensive role-based access control with 4 distinct roles,
-                a complete worklog approval workflow, meeting management, and interactive reporting
-                dashboards with pie, line, and bar charts.
+              <p className="text-stone-600 dark:text-stone-300 leading-relaxed">
+                {pd.aboutP2}
               </p>
             </div>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <Users size={18} className="mt-1 text-indigo-600 shrink-0" />
+                <Users size={18} className="mt-1 text-indigo-600 dark:text-indigo-400 shrink-0" />
                 <div>
-                  <p className="font-semibold text-stone-800 text-sm">Target Users</p>
-                  <p className="text-sm text-stone-500">Small-to-medium software companies/centers</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm">{pd.targetUsersLabel}</p>
+                  <p className="text-sm text-stone-500 dark:text-stone-400">{pd.targetUsersValue}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Clock size={18} className="mt-1 text-indigo-600 shrink-0" />
+                <Clock size={18} className="mt-1 text-indigo-600 dark:text-indigo-400 shrink-0" />
                 <div>
-                  <p className="font-semibold text-stone-800 text-sm">Core Workflow</p>
-                  <p className="text-sm text-stone-500">Log Work → Submit → PM Review → Approve/Reject → Resubmit</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm">{pd.coreWorkflowLabel}</p>
+                  <p className="text-sm text-stone-500 dark:text-stone-400">{pd.coreWorkflowValue}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <PieChart size={18} className="mt-1 text-indigo-600 shrink-0" />
+                <PieChart size={18} className="mt-1 text-indigo-600 dark:text-indigo-400 shrink-0" />
                 <div>
-                  <p className="font-semibold text-stone-800 text-sm">Dashboards</p>
-                  <p className="text-sm text-stone-500">Product summary, worklog hours by role/member, work type breakdown</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm">{pd.dashboardsLabel}</p>
+                  <p className="text-sm text-stone-500 dark:text-stone-400">{pd.dashboardsValue}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <CalendarDays size={18} className="mt-1 text-indigo-600 shrink-0" />
+                <CalendarDays size={18} className="mt-1 text-indigo-600 dark:text-indigo-400 shrink-0" />
                 <div>
-                  <p className="font-semibold text-stone-800 text-sm">Holiday Management</p>
-                  <p className="text-sm text-stone-500">Recurring holidays, future-date validation, bulk delete</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm">{pd.holidayMgmtLabel}</p>
+                  <p className="text-sm text-stone-500 dark:text-stone-400">{pd.holidayMgmtValue}</p>
                 </div>
               </div>
             </div>
@@ -276,7 +214,7 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-8">RBAC Permission Model</h2>
+          <h2 className="font-display text-3xl mb-8 text-stone-900 dark:text-stone-100">{pd.rbacTitle}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {actors.map((a, i) => (
               <motion.div
@@ -285,16 +223,16 @@ export default function WorklogsDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05, duration: 0.4 }}
-                className={`rounded-2xl bg-white border ${a.border} p-6 hover:shadow-lg transition-all duration-300`}
+                className={`rounded-2xl bg-white dark:bg-stone-800 border ${a.border} p-6 hover:shadow-lg transition-all duration-300`}
               >
                 <div className={`w-10 h-10 rounded-xl ${a.bg} ${a.color} flex items-center justify-center mb-3`}>
                   <a.icon size={20} />
                 </div>
-                <h3 className="font-display text-lg text-stone-800 mb-3">{a.role}</h3>
+                <h3 className="font-display text-lg text-stone-800 dark:text-stone-200 mb-3">{a.role}</h3>
                 <ul className="space-y-2">
                   {a.permissions.map((p) => (
-                    <li key={p} className="text-sm text-stone-500 flex items-start gap-2">
-                      <span className={`mt-1.5 w-1.5 h-1.5 rounded-full ${a.bg} ${a.color} shrink-0`} style={{ backgroundColor: "currentColor", opacity: 0.5 }} />
+                    <li key={p} className="text-sm text-stone-500 dark:text-stone-400 flex items-start gap-2">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-current shrink-0 opacity-50" />
                       {p}
                     </li>
                   ))}
@@ -312,19 +250,19 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-8">Key Features</h2>
+          <h2 className="font-display text-3xl mb-8 text-stone-900 dark:text-stone-100">{pd.keyFeaturesTitle}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((f, i) => (
+            {pd.features.map((f, i) => (
               <motion.div
                 key={f.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05, duration: 0.4 }}
-                className="rounded-2xl bg-white border border-stone-100 p-6 hover:shadow-lg hover:border-indigo-200/50 transition-all duration-300"
+                className="rounded-2xl bg-white dark:bg-stone-800 border border-stone-100 dark:border-stone-700 p-6 hover:shadow-lg hover:border-indigo-200/50 dark:hover:border-indigo-700 transition-all duration-300"
               >
-                <h3 className="font-display text-lg text-indigo-800 mb-2">{f.title}</h3>
-                <p className="text-sm text-stone-500 leading-relaxed">{f.description}</p>
+                <h3 className="font-display text-lg text-indigo-800 dark:text-indigo-400 mb-2">{f.title}</h3>
+                <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">{f.description}</p>
               </motion.div>
             ))}
           </div>
@@ -338,7 +276,7 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-8">Use Case Catalogue</h2>
+          <h2 className="font-display text-3xl mb-8 text-stone-900 dark:text-stone-100">{pd.useCatalogueTitle}</h2>
           <div className="grid md:grid-cols-2 gap-3">
             {useCases.map((uc, i) => (
               <motion.div
@@ -347,14 +285,14 @@ export default function WorklogsDetail() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.03, duration: 0.3 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-white border border-stone-100 hover:border-indigo-200 transition-colors"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-stone-800 border border-stone-100 dark:border-stone-700 hover:border-indigo-200 dark:hover:border-indigo-700 transition-colors"
               >
-                <span className="shrink-0 w-12 h-12 rounded-xl bg-indigo-50 text-indigo-700 font-bold text-xs flex items-center justify-center border border-indigo-100">
+                <span className="shrink-0 w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 font-bold text-xs flex items-center justify-center border border-indigo-100 dark:border-indigo-800">
                   {uc.id}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-stone-800 text-sm">{uc.name}</p>
-                  <p className="text-xs text-stone-400 mt-0.5">{uc.flows}</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm">{uc.name}</p>
+                  <p className="text-xs text-stone-400 dark:text-stone-500 mt-0.5">{uc.flows}</p>
                 </div>
               </motion.div>
             ))}
@@ -369,39 +307,27 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-8">Worklog Lifecycle</h2>
+          <h2 className="font-display text-3xl mb-8 text-stone-900 dark:text-stone-100">{pd.worklogLifecycleTitle}</h2>
           <div className="flex flex-wrap gap-3 items-center">
             {[
-              "Create Worklog",
-              "→",
-              "Open",
-              "→",
-              "PM Reviews",
-              "→",
-              "Approved → Closed",
-              "|",
-              "Rejected",
-              "→",
-              "Member Edits",
-              "→",
-              "Resubmit → Updated",
-              "→",
-              "PM Re-reviews",
+              "Create Worklog", "→", "Open", "→", "PM Reviews", "→",
+              "Approved → Closed", "|", "Rejected", "→", "Member Edits", "→",
+              "Resubmit → Updated", "→", "PM Re-reviews",
             ].map((step, i) =>
               step === "→" ? (
                 <span key={i} className="text-indigo-400 font-bold text-lg">→</span>
               ) : step === "|" ? (
                 <span key={i} className="text-red-400 font-bold text-lg">|</span>
               ) : step.includes("Rejected") ? (
-                <span key={i} className="px-3 py-2 text-xs font-semibold rounded-lg bg-red-50 text-red-700 border border-red-100">
+                <span key={i} className="px-3 py-2 text-xs font-semibold rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-100 dark:border-red-800">
                   {step}
                 </span>
               ) : step.includes("Closed") ? (
-                <span key={i} className="px-3 py-2 text-xs font-semibold rounded-lg bg-green-50 text-green-700 border border-green-100">
+                <span key={i} className="px-3 py-2 text-xs font-semibold rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-100 dark:border-green-800">
                   {step}
                 </span>
               ) : (
-                <span key={i} className="px-3 py-2 text-xs font-semibold rounded-lg bg-indigo-50 text-indigo-800 border border-indigo-100">
+                <span key={i} className="px-3 py-2 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-800 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
                   {step}
                 </span>
               )
@@ -417,19 +343,19 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-8">UI Conventions Documented</h2>
+          <h2 className="font-display text-3xl mb-8 text-stone-900 dark:text-stone-100">{pd.uiConventionsTitle}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {conventions.map((c, i) => (
+            {pd.conventions.map((c, i) => (
               <motion.div
                 key={c.name}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.04, duration: 0.3 }}
-                className="p-4 rounded-xl bg-white border border-stone-100 hover:border-indigo-200 transition-colors"
+                className="p-4 rounded-xl bg-white dark:bg-stone-800 border border-stone-100 dark:border-stone-700 hover:border-indigo-200 dark:hover:border-indigo-700 transition-colors"
               >
-                <p className="font-semibold text-indigo-700 text-sm mb-1">{c.name}</p>
-                <p className="text-xs text-stone-500">{c.desc}</p>
+                <p className="font-semibold text-indigo-700 dark:text-indigo-400 text-sm mb-1">{c.name}</p>
+                <p className="text-xs text-stone-500 dark:text-stone-400">{c.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -443,21 +369,21 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="font-display text-3xl mb-8">BA Deliverables</h2>
+          <h2 className="font-display text-3xl mb-8 text-stone-900 dark:text-stone-100">{pd.baDeliverablesTitle}</h2>
           <div className="space-y-3">
-            {documents.map((d, i) => (
+            {pd.documents.map((d, i) => (
               <motion.div
                 key={d.name}
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.03, duration: 0.3 }}
-                className="flex items-start gap-4 p-4 rounded-xl bg-white border border-stone-100 hover:border-indigo-200 transition-colors"
+                className="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-stone-800 border border-stone-100 dark:border-stone-700 hover:border-indigo-200 dark:hover:border-indigo-700 transition-colors"
               >
                 <FileText size={18} className="mt-0.5 text-indigo-500 shrink-0" />
                 <div>
-                  <p className="font-semibold text-stone-800 text-sm">{d.name}</p>
-                  <p className="text-xs text-stone-400 mt-0.5">{d.desc}</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm">{d.name}</p>
+                  <p className="text-xs text-stone-400 dark:text-stone-500 mt-0.5">{d.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -472,28 +398,23 @@ export default function WorklogsDetail() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="font-display text-3xl mb-6">Entity Status Reference</h2>
+          <h2 className="font-display text-3xl mb-6 text-stone-900 dark:text-stone-100">{pd.entityStatusTitle}</h2>
           <div className="grid md:grid-cols-2 gap-4">
-            {[
-              { entity: "Project", statuses: ["Open", "Closed", "Pending", "Canceled"] },
-              { entity: "Product", statuses: ["Open", "Closed", "Pending", "Canceled"] },
-              { entity: "Meeting", statuses: ["Open", "Closed", "Canceled"] },
-              { entity: "Worklog", statuses: ["Open", "Updated", "Rejected", "Closed"] },
-            ].map((e) => (
-              <div key={e.entity} className="p-4 rounded-xl bg-white border border-stone-100">
-                <p className="font-semibold text-stone-800 text-sm mb-2">{e.entity}</p>
+            {entityStatuses.map((e) => (
+              <div key={e.entity} className="p-4 rounded-xl bg-white dark:bg-stone-800 border border-stone-100 dark:border-stone-700">
+                <p className="font-semibold text-stone-800 dark:text-stone-200 text-sm mb-2">{e.entity}</p>
                 <div className="flex flex-wrap gap-2">
                   {e.statuses.map((s) => (
                     <span
                       key={s}
                       className={`px-2.5 py-1 text-xs rounded-full font-medium ${
-                        s === "Open" ? "bg-blue-50 text-blue-700" :
-                        s === "Closed" ? "bg-green-50 text-green-700" :
-                        s === "Pending" ? "bg-amber-50 text-amber-700" :
-                        s === "Canceled" ? "bg-stone-100 text-stone-500" :
-                        s === "Updated" ? "bg-indigo-50 text-indigo-700" :
-                        s === "Rejected" ? "bg-red-50 text-red-700" :
-                        "bg-stone-50 text-stone-600"
+                        s === "Open" ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400" :
+                        s === "Closed" ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400" :
+                        s === "Pending" ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400" :
+                        s === "Canceled" ? "bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400" :
+                        s === "Updated" ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-400" :
+                        s === "Rejected" ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400" :
+                        "bg-stone-50 dark:bg-stone-700 text-stone-600 dark:text-stone-300"
                       }`}
                     >
                       {s}
@@ -506,13 +427,13 @@ export default function WorklogsDetail() {
         </motion.div>
 
         {/* Back link */}
-        <div className="text-center pt-8 border-t border-stone-100">
+        <div className="text-center pt-8 border-t border-stone-100 dark:border-stone-700">
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-800 text-white font-semibold hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-200 active:scale-95"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-800 text-white font-semibold hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-200 dark:hover:shadow-indigo-900 active:scale-95"
           >
             <ArrowLeft size={16} />
-            Back to All Projects
+            {t.common.backToProjects}
           </Link>
         </div>
       </div>
